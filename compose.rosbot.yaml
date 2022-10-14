@@ -12,8 +12,6 @@ services:
     ipc: host
     devices:
       - ${LIDAR_SERIAL:?err}:/dev/ttyUSB0
-    volumes:
-      - ./superclient-dds.xml:/dds-config.xml
     environment:
       - ROS_DISCOVERY_SERVER=127.0.0.1:11811
     command: ros2 launch sllidar_ros2 sllidar_launch.py serial_baudrate:=${LIDAR_BAUDRATE:-115200}
@@ -29,7 +27,7 @@ services:
     environment:
       - ROS_DISCOVERY_SERVER=127.0.0.1:11811
       - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml
-    command: ros2 launch rosbot_xl_bringup bringup.launch.py mecanum:=${MECANUM:-False}
+    command: ros2 launch rosbot_xl_bringup bringup.launch.py mecanum:=True
 
   microros:
     image: microros/micro-ros-agent:humble
@@ -37,7 +35,6 @@ services:
     ipc: host
     volumes:
       - ./micro-ros_entrypoint.sh:/micro-ros_entrypoint.sh
-      - ./superclient-dds.xml:/dds-config.xml
     environment:
       - ROS_DISCOVERY_SERVER=127.0.0.1:11811
       - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml

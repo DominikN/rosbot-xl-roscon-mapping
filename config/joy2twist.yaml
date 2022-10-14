@@ -6,8 +6,8 @@
       slow: 0.2
 
     angular_velocity_factor:
-      fast: 1.0
-      regular: 0.5
+      fast: 2.0
+      regular: 1.0
       slow: 0.2
 
     # This button mapping should be adjusted to the specific controller
